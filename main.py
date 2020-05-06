@@ -4,7 +4,28 @@ app = flask.Flask(__name__)
 
 
 @app.route('/')
-def index():
+@app.route('/news')
+def main():
+    return flask.render_template('WebQuietCry.html')
+
+
+@app.route('/about_us')
+def about_us():
+    return flask.render_template('WebQuietCry.html')
+
+
+@app.route('/leaderboard')
+def leaderboard():
+    return flask.render_template('WebQuietCry.html')
+
+
+@app.route('/download')
+def download():
+    return flask.render_template('WebQuietCry.html')
+
+
+@app.route('/donate')
+def donate():
     return flask.render_template('WebQuietCry.html')
 
 

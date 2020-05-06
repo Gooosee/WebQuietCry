@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="static\css\WebQuietCry.css">
+	<link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
+    <title>Page Title</title>
+    <style>
+	body {
+	  background-color: #D3916E;
+	}
+	</style>
+</head>
+<body>
+<div class="imgStart">
+<div class="regLog">
+	<p> <br> </p>
+
+</div>
+</div>
+<nav class="site-header sticky-top py-1">
+  <div class="container d-flex flex-column flex-md-row justify-content-between">
+    <a class="py-2 d-none d-md-inline-block" href="news">Новости</a>
+    <a class="py-2 d-none d-md-inline-block" href="leaderboard">Лидеры</a>
+    <a class="py-2 d-none d-md-inline-block" href="download">Скачать</a>
+    <a class="py-2 d-none d-md-inline-block" href="donate">Донат</a>
+    <a class="py-2 d-none d-md-inline-block" href="about_us">О нас</a>
+  </div>
+</nav>
+<main role="main" class="container">
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>
