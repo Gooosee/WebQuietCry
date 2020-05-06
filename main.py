@@ -1,5 +1,3 @@
-import datetime
-
 import flask
 from flask import redirect, render_template
 from flask_login import LoginManager, login_user, logout_user, login_required
