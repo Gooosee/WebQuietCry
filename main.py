@@ -38,10 +38,18 @@ def download():
 
 @app.route('/reg', methods=['GET', 'POST'])
 def reg():
-    form = LoginForm()
-    if form.validate_on_submit():
+    formR = LoginForm()
+    if formR.validate_on_submit():
         return redirect('/success')
-    return flask.render_template('registr.html', title='Авторизация', form=form)
+    return flask.render_template('registr.html', title='Регистрация', form=formR)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    formL = LoginForm()
+    if formL.validate_on_submit():
+        return redirect('/success')
+    return flask.render_template('login.html', title='Авторизация', form=formL)
 
 
 @app.route('/donate')
