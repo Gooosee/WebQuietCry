@@ -24,8 +24,14 @@ p {
 .regLog {
     float: right;
 }
-
-
+.down {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 650px; /* Положение от нижнего края */
+    left: 780px; /* Положение от правого края */
+}
+.dwn {
+    font-size: 300%;
+}
 .site-header {
   background-color: rgba(0, 0, 0, .85);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
