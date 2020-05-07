@@ -3,10 +3,10 @@ p {
 	font-size: 18px
 }
 .imgStart {
-	background: url("backIm1.png") no-repeat fixed;
+	background: url("../img/backIm1.png") no-repeat fixed;
 	background-size: contain;
 	min-width: 1000px;
-	height: 340px
+	height: 440px
 }
 .regForm {
     border: 2px solid red;
