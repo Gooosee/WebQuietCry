@@ -72,7 +72,7 @@ def reg():
             userNew = User()
             userNew.name = formR.login.data
             userNew.email = formR.email.data
-            userNew.password = formR.password.data
+            userNew.set_password(formR.password.data)
             session = db_session.create_session()
             session.add(userNew)
             session.commit()
@@ -89,14 +89,16 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         session = db_session.create_session()
+        for user in session.query(User).all():
+            print(user.hashed_password)
         user = session.query(User).filter(User.email == form.email.data).first()
+        print(user.hashed_password == form.password.data)
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
         return render_template('login.html',
                                message="Неправильный логин или пароль",
                                form=form)
-
     return render_template('login.html', title='Авторизация', form=form)
 
 
