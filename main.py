@@ -201,7 +201,7 @@ def com_delete(id):
         session.commit()
     else:
         abort(404)
-    return redirect('/')
+    return redirect('/download')
 
 
 @app.route('/addNews/<int:id>', methods=['GET', 'POST'])
