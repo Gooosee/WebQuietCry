@@ -8,6 +8,7 @@ from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired
 
 from data import db_session
+from data.comments import Comments
 from data.leaderBoard import LeaderBoard
 from data.news import News
 from data.users import User
@@ -21,7 +22,13 @@ login_manager.init_app(app)
 class NewsForm(FlaskForm):
     title = StringField('Заголовок', validators=[DataRequired()])
     content = TextAreaField("Содержание")
-    submit = SubmitField('Применить')
+    submit = SubmitField('Добавить')
+
+
+class ComForm(FlaskForm):
+    title = StringField('Заголовок', validators=[DataRequired()])
+    content = TextAreaField("Содержание")
+    submit = SubmitField('Добавить')
 
 
 class RegForm(FlaskForm):
@@ -77,7 +84,9 @@ def leaderboard():
 
 @app.route('/download')
 def download():
-    return flask.render_template('download.html')
+    session = db_session.create_session()
+    comments = session.query(Comments)
+    return render_template("download.html", comments=comments)
 
 
 @app.route('/reg', methods=['GET', 'POST'])
@@ -108,10 +117,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         session = db_session.create_session()
-        for user in session.query(User).all():
-            print(user.hashed_password)
         user = session.query(User).filter(User.email == form.email.data).first()
-        print(user.hashed_password == form.password.data)
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
@@ -121,7 +127,7 @@ def login():
     return render_template('login.html', title='Авторизация', form=form)
 
 
-@app.route('/addNews', methods=['GET', 'POST'])
+@app.route('/addNews',  methods=['GET', 'POST'])
 @login_required
 def add_news():
     form = NewsForm()
@@ -136,6 +142,64 @@ def add_news():
         return redirect('/')
     return render_template('addNews.html', title='Добавление новости',
                            form=form)
+
+
+@app.route('/addCom', methods=['GET', 'POST'])
+@login_required
+def add_com():
+    form = ComForm()
+    if form.validate_on_submit():
+        session = db_session.create_session()
+        com = Comments()
+        com.title = form.title.data
+        com.content = form.content.data
+        current_user.com.append(com)
+        session.merge(current_user)
+        session.commit()
+        return redirect('/')
+    return render_template('addCom.html', title='Добавление комментария',
+                           form=form)
+
+
+@app.route('/addCom/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_com(id):
+    form = ComForm()
+    if request.method == "GET":
+        session = db_session.create_session()
+        com = session.query(Comments).filter(Comments.id == id,
+                                          Comments.user == current_user).first()
+        if com:
+            form.title.data = com.title
+            form.content.data = com.content
+        else:
+            abort(404)
+    if form.validate_on_submit():
+        session = db_session.create_session()
+        com = session.query(Comments).filter(Comments.id == id,
+                                          Comments.user == current_user).first()
+        if com:
+            com.title = form.title.data
+            com.content = form.content.data
+            session.commit()
+            return redirect('/')
+        else:
+            abort(404)
+    return render_template('addCom.html', title='Редактирование комментария', form=form)
+
+
+@app.route('/com_delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def com_delete(id):
+    session = db_session.create_session()
+    com = session.query(Comments).filter(Comments.id == id,
+                                      Comments.user == current_user).first()
+    if com:
+        session.delete(com)
+        session.commit()
+    else:
+        abort(404)
+    return redirect('/')
 
 
 @app.route('/addNews/<int:id>', methods=['GET', 'POST'])
