@@ -4,7 +4,7 @@
 <h1>
 	Новости
 </h1>
-{% if current_user.is_authenticated %}
+{% if current_user.is_authenticated%}
         <a href="addNews" class="btn btn-secondary">Добавить новость</a>
 {% endif %}
 {% for item in news%}
@@ -15,7 +15,7 @@
 <p>
 	{{item.content}}
 </p>
-{% if current_user.is_authenticated and current_user == item.user %}
+{% if current_user.is_authenticated and current_user == item.user  and (current_user.email == 'tima123azaza@gmail.com' or current_user.email == 'saromanovlad@gmail.com')%}
     <div>
         <a href="/addNews/{{ item.id }}" class="btn btn-warning">Изменить</a>
         <a href="/news_delete/{{ item.id }}" class="btn btn-danger">Удалить</a>
