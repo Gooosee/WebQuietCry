@@ -156,7 +156,7 @@ def add_com():
         current_user.com.append(com)
         session.merge(current_user)
         session.commit()
-        return redirect('/')
+        return redirect('/download')
     return render_template('addCom.html', title='Добавление комментария',
                            form=form)
 
@@ -182,7 +182,7 @@ def edit_com(id):
             com.title = form.title.data
             com.content = form.content.data
             session.commit()
-            return redirect('/')
+            return redirect('/download')
         else:
             abort(404)
     return render_template('addCom.html', title='Редактирование комментария', form=form)

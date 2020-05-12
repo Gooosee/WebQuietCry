@@ -63,8 +63,6 @@ img {
 }
 .comms {
     position: absolute; /* Абсолютное позиционирование */
-    top: 600px; /* Положение от нижнего края */
-    left: 400px;
     color: #26140B;
 	margin: auto;
 	width: 75%;
