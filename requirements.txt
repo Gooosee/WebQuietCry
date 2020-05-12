@@ -7,3 +7,4 @@ flask_restful
 sqlalchemy 
 psycopg2
 flask_login
+sqlalchemy_serializer
