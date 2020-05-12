@@ -6,3 +6,4 @@ werkzeug
 flask_restful 
 sqlalchemy 
 psycopg2
+flask_login
