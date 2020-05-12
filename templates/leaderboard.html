@@ -4,4 +4,16 @@
 <h1>
 	Таблица лидеров
 </h1>
+<table style="width:30%">
+<tr style="font-weight: bold;">
+    <td> Ник </td>
+    <td> Счет </td>
+</tr>
+{% for item in LB %}
+<tr>
+    <td>{{item.name}}</td>
+    <td>{{item.record}}</td>
+</tr>
+{% endfor %}
+</table>
 {% endblock %}

@@ -12,3 +12,6 @@ class LeaderBoard(SqlAlchemyBase, UserMixin, SerializerMixin):
                            primary_key=True, autoincrement=True)
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     record = sqlalchemy.Column(sqlalchemy.INTEGER, nullable=True)
+
+    def __repr__(self):
+        return [self.name, self.record]

@@ -81,7 +81,9 @@ def about_us():
 
 @app.route('/leaderboard')
 def leaderboard():
-    return flask.render_template('leaderboard.html')
+    session = db_session.create_session()
+    LB = session.query(LeaderBoard)
+    return flask.render_template('leaderboard.html', LB=LB)
 
 
 @app.route('/download')
