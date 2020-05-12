@@ -271,9 +271,5 @@ if __name__ == '__main__':
     db_session.global_init() # уберём параметр
 
     # если в базе пусто, заполним её тестовыми данными (это не обязательно)
-    session = db_session.create_session()
-    if not session.query(User).first():
-       import fill_base
-
     app.run(host='0.0.0.0', port=os.environ.get("PORT", 5000))
 
