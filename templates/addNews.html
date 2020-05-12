@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Добавление новости</h1>
-<p action="" method="post">
+<form action="" method="post">
     {{ form.hidden_tag() }}
     {{ form.csrf_token }}
     <p>
