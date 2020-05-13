@@ -20,7 +20,7 @@
 <h4> {{item.title}} </h4>
 <p>
 	{{item.content}}<br>
-    {{current_user.name}}
+    {{item.user.name}}
 </p>
 {% if current_user.is_authenticated and current_user == item.user %}
     <div>
